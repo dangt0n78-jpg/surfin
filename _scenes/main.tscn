@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://b73wanxudeh10"]
+
+[ext_resource type="PackedScene" uid="uid://c5k0sawj5pbd7" path="res://_scenes/player.tscn" id="1_dmym1"]
+[ext_resource type="Script" uid="uid://dikpfnx5den3" path="res://_scripts/main.gd" id="1_lavtb"]
+[ext_resource type="PackedScene" uid="uid://ey8mvbmte2lt" path="res://_scenes/hole.tscn" id="2_x6rnu"]
+[ext_resource type="PackedScene" uid="uid://r85d4i5etayg" path="res://_scenes/planks.tscn" id="3_3q5j6"]
+[ext_resource type="PackedScene" uid="uid://obtfve6lbv7q" path="res://_scenes/stone.tscn" id="3_6bnj4"]
+
+[sub_resource type="Curve2D" id="Curve2D_3q5j6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1150, 2, 0, 0, 0, 0, -3, -4, 0, 0, 0, 0, -1, 645, 0, 0, 0, 0, 1152, 643, 0, 0, 0, 0, 1152, 2)
+}
+point_count = 5
+
+[node name="main" type="Node" unique_id=1092437447]
+script = ExtResource("1_lavtb")
+SCENES = Array[PackedScene]([ExtResource("3_3q5j6"), ExtResource("3_6bnj4")])
+
+[node name="Player" parent="." unique_id=830179734 instance=ExtResource("1_dmym1")]
+position = Vector2(997, 344)
+
+[node name="hole" parent="." unique_id=106772894 instance=ExtResource("2_x6rnu")]
+position = Vector2(576, 328)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1497423113]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1365473999]
+offset_left = 434.0
+offset_top = 25.0
+offset_right = 619.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="obstacle_path" type="Path2D" parent="." unique_id=250092754]
+curve = SubResource("Curve2D_3q5j6")
+
+[node name="obstacle_spawn_location" type="PathFollow2D" parent="obstacle_path" unique_id=1353640626]
+position = Vector2(1150, 2)
+rotation = -3.1363888
+
+[node name="plank_timer" type="Timer" parent="." unique_id=1591356788]
+autostart = true
+
+[node name="Special_marker" type="Marker2D" parent="." unique_id=301093601]
+position = Vector2(578, 329)
+
+[connection signal="timeout" from="plank_timer" to="." method="_on_plank_timer_timeout"]

@@ -1,0 +1,38 @@
+extends CharacterBody2D
+
+@export var pull_force :float= 120.0
+@export var swirl_force :float= 120.0
+
+@export var minspeed :float = 180.0
+@export var maxpspeed :float= 360.0
+@export var acceleration :float = 300.0
+@export var deceleration :float = 400.0
+
+const GOLDEN_SPIRAL_RATIO = 0.30635
+var center_pos :Vector2
+var current_speed :float= 0
+
+func _ready() -> void:
+	center_pos = get_viewport_rect().size / 2.0
+	current_speed = minspeed
+
+
+func _physics_process(delta: float) -> void:
+	
+	var to_center:Vector2 = (center_pos - global_position).normalized()
+	var clockwise_tangent :Vector2 = Vector2(to_center.y, -to_center.x)
+	var whirpool_velocity :Vector2= (to_center * pull_force) + (clockwise_tangent * swirl_force)
+	
+	var player_velocity :Vector2
+	if Input.is_action_pressed("action"):
+		current_speed = move_toward(current_speed,  maxpspeed, acceleration * delta)
+		var golden_spiral_dir: Vector2 = (clockwise_tangent + (-to_center * GOLDEN_SPIRAL_RATIO)).normalized()
+		player_velocity = golden_spiral_dir * current_speed
+	else:
+		current_speed = move_toward(current_speed, minspeed, deceleration * delta)
+		velocity = whirpool_velocity
+	
+	velocity = velocity.move_toward(player_velocity, 600.0 * delta)
+	position.x = clamp(position.x, 24.0, 1138.0)
+	position.y = clamp(position.y, 31.0, 618.0)
+	move_and_slide()

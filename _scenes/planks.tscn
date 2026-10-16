@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://r85d4i5etayg"]
+
+[ext_resource type="Script" uid="uid://rv3600wmo7sf" path="res://_scripts/planks.gd" id="1_1yeu0"]
+[ext_resource type="Texture2D" uid="uid://4qugfd2r53my" path="res://_assets/plank.png" id="1_25ab1"]
+[ext_resource type="Script" uid="uid://dhehr5ujjh5u" path="res://_scripts/outterhitbox.gd" id="2_1yeu0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8upip"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3owqy"]
+radius = 48.0
+
+[node name="planks" type="Area2D" unique_id=1788105500]
+position = Vector2(50, 18)
+script = ExtResource("1_1yeu0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1711838634]
+scale = Vector2(1.8125, 1.84375)
+texture = ExtResource("1_25ab1")
+
+[node name="hitbox" type="CollisionShape2D" parent="." unique_id=861745925]
+shape = SubResource("CircleShape2D_8upip")
+
+[node name="outterhitbox" type="Area2D" parent="." unique_id=767312713]
+script = ExtResource("2_1yeu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="outterhitbox" unique_id=1775727958]
+position = Vector2(-2, -2)
+shape = SubResource("CircleShape2D_3owqy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="outterhitbox" to="outterhitbox" method="_on_body_entered"]
+[connection signal="body_exited" from="outterhitbox" to="outterhitbox" method="_on_body_exited"]

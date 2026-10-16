@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dh8j24qc7k87s"]
+
+[ext_resource type="Script" uid="uid://bvaqphsp5seei" path="res://_scripts/tentecle.gd" id="1_77rb6"]
+[ext_resource type="Texture2D" uid="uid://cv2q40ou6fnow" path="res://_assets/tente.png" id="1_p3u8s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3owqy"]
+radius = 74.00676
+
+[node name="tentecle" type="Area2D" unique_id=1182030087]
+position = Vector2(867, 362)
+script = ExtResource("1_77rb6")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1271905174]
+position = Vector2(17.000004, -12)
+scale = Vector2(2.484375, 2.484375)
+texture = ExtResource("1_p3u8s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2028698830]
+position = Vector2(3, -10)
+shape = SubResource("CircleShape2D_3owqy")
+
+[node name="alive_timer" type="Timer" parent="." unique_id=707608430]
+wait_time = 0.5
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="alive_timer" to="." method="_on_alive_timer_timeout"]
