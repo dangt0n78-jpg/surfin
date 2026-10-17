@@ -11,6 +11,16 @@ extends CharacterBody2D
 const GOLDEN_SPIRAL_RATIO = 0.30635
 var center_pos :Vector2
 var current_speed :float= 0
+var orbit_dir :float= 1.0
+
+signal died
+
+func die():
+	died.emit()
+
+func _reverse_orbit():
+	orbit_dir *= -1.0
+	velocity = -velocity * 0.8
 
 func _ready() -> void:
 	center_pos = get_viewport_rect().size / 2.0
@@ -20,7 +30,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	var to_center:Vector2 = (center_pos - global_position).normalized()
-	var clockwise_tangent :Vector2 = Vector2(to_center.y, -to_center.x)
+	var clockwise_tangent :Vector2 = Vector2(to_center.y, -to_center.x) * orbit_dir
 	var whirpool_velocity :Vector2= (to_center * pull_force) + (clockwise_tangent * swirl_force)
 	
 	var player_velocity :Vector2

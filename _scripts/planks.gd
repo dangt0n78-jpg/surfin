@@ -11,4 +11,5 @@ func _process(delta: float) -> void:
 	position += to_center
 
 func _on_body_entered(body: Node2D) -> void:
+	body.die()
 	body.queue_free()

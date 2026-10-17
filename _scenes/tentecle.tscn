@@ -7,7 +7,7 @@
 radius = 74.00676
 
 [node name="tentecle" type="Area2D" unique_id=1182030087]
-position = Vector2(867, 362)
+position = Vector2(-4, 6)
 script = ExtResource("1_77rb6")
 metadata/_edit_group_ = true
 
@@ -21,7 +21,7 @@ position = Vector2(3, -10)
 shape = SubResource("CircleShape2D_3owqy")
 
 [node name="alive_timer" type="Timer" parent="." unique_id=707608430]
-wait_time = 0.5
+wait_time = 0.8
 autostart = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

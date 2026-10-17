@@ -5,6 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://ey8mvbmte2lt" path="res://_scenes/hole.tscn" id="2_x6rnu"]
 [ext_resource type="PackedScene" uid="uid://r85d4i5etayg" path="res://_scenes/planks.tscn" id="3_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://obtfve6lbv7q" path="res://_scenes/stone.tscn" id="3_6bnj4"]
+[ext_resource type="PackedScene" uid="uid://cksslyoqa5srt" path="res://_scenes/mermaid.tscn" id="4_7kglf"]
+[ext_resource type="Texture2D" uid="uid://b5p2qiwdu1ux0" path="res://_assets/background.png" id="4_owtmn"]
+[ext_resource type="Script" uid="uid://dcapnkx7oycw3" path="res://_scripts/special_marker.gd" id="6_ce27d"]
+[ext_resource type="PackedScene" uid="uid://dh8j24qc7k87s" path="res://_scenes/tentecle.tscn" id="7_urak4"]
+[ext_resource type="PackedScene" uid="uid://c2dfffnl7l8dg" path="res://_scenes/bomb.tscn" id="8_hi6yo"]
 
 [sub_resource type="Curve2D" id="Curve2D_3q5j6"]
 _data = {
@@ -14,7 +19,12 @@ point_count = 5
 
 [node name="main" type="Node" unique_id=1092437447]
 script = ExtResource("1_lavtb")
-SCENES = Array[PackedScene]([ExtResource("3_3q5j6"), ExtResource("3_6bnj4")])
+SCENES = Array[PackedScene]([ExtResource("3_3q5j6"), ExtResource("3_6bnj4"), ExtResource("4_7kglf")])
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=496991138]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("4_owtmn")
 
 [node name="Player" parent="." unique_id=830179734 instance=ExtResource("1_dmym1")]
 position = Vector2(997, 344)
@@ -34,6 +44,36 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="game over" type="Label" parent="CanvasLayer" unique_id=659609387]
+visible = false
+offset_left = 384.0
+offset_top = 108.0
+offset_right = 732.0
+offset_bottom = 269.0
+theme_override_font_sizes/font_size = 64
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=624146642]
+visible = false
+offset_left = 445.0
+offset_top = 411.0
+offset_right = 692.0
+offset_bottom = 502.0
+theme_override_font_sizes/font_size = 32
+text = "RESTART"
+
+[node name="highscore" type="Label" parent="CanvasLayer" unique_id=1987183050]
+visible = false
+offset_left = 435.0
+offset_top = 259.0
+offset_right = 691.0
+offset_bottom = 378.0
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="obstacle_path" type="Path2D" parent="." unique_id=250092754]
 curve = SubResource("Curve2D_3q5j6")
 
@@ -46,5 +86,13 @@ autostart = true
 
 [node name="Special_marker" type="Marker2D" parent="." unique_id=301093601]
 position = Vector2(578, 329)
+script = ExtResource("6_ce27d")
+SPECIAL_SCENES = Array[PackedScene]([ExtResource("7_urak4"), ExtResource("8_hi6yo")])
+circle_color = Color(0.6431373, 0.17254902, 0.15686275, 0.4745098)
 
+[node name="Timer" type="Timer" parent="Special_marker" unique_id=2599832]
+autostart = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="plank_timer" to="." method="_on_plank_timer_timeout"]
+[connection signal="timeout" from="Special_marker/Timer" to="Special_marker" method="_on_timer_timeout"]

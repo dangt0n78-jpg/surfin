@@ -28,5 +28,6 @@ script = ExtResource("3_56blh")
 position = Vector2(-2, -2)
 shape = SubResource("CircleShape2D_3owqy")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="outterhitbox" to="outterhitbox" method="_on_body_entered"]
 [connection signal="body_exited" from="outterhitbox" to="outterhitbox" method="_on_body_exited"]

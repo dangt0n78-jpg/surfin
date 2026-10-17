@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cksslyoqa5srt"]
+
+[ext_resource type="Script" uid="uid://c15j5sfgn40b0" path="res://_scripts/mermaid.gd" id="1_76o8e"]
+[ext_resource type="Texture2D" uid="uid://5h8bfg2x3yhk" path="res://_assets/mermaid.png" id="2_04v61"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3owqy"]
+radius = 60.074955
+
+[node name="mermaid" type="Area2D" unique_id=1357435528]
+script = ExtResource("1_76o8e")
+circle_color = Color(1, 0, 0, 0.34901962)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=791571937]
+position = Vector2(1, -1)
+scale = Vector2(2.140625, 2.140625)
+texture = ExtResource("2_04v61")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1691281693]
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_3owqy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
