@@ -23,6 +23,8 @@ func _on_body_exited(body: Node2D) -> void:
 		
 		Stats.min_time -= 0.1
 		Stats.max_time -= 0.1
+		Stats.min_time_marker -= 0.1
+		Stats.max_time_marker -= 0.1
 		body.pull_force += 10
 		body.swirl_force += 10
 		
@@ -34,9 +36,15 @@ func _on_body_exited(body: Node2D) -> void:
 		
 		if Stats.min_time < 0.1:
 			Stats.min_time = 0.1
-			
+		
 		if Stats.max_time < 0.3:
 			Stats.max_time = 0.3
+		
+		if Stats.min_time_marker < 0.5:
+			Stats.min_time_marker = 0.5
+		
+		if Stats.max_time_marker < 1.0:
+			Stats.max_time_marker = 1.0
 	if tween:
 		tween.kill()
 	tween = create_tween()

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="surfin"
-run/main_scene="uid://b73wanxudeh10"
+run/main_scene="uid://c6bgr7l7lcspf"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="uid://b55t4pn6dqhao"
 

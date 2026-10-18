@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://c6bgr7l7lcspf"]
+
+[ext_resource type="Script" uid="uid://bijgpui4d3wiy" path="res://_scripts/menu.gd" id="1_r7r5g"]
+
+[node name="menu" type="Control" unique_id=1254623735]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r7r5g")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=249246011]
+layout_mode = 0
+offset_right = 1157.0
+offset_bottom = 647.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=839950293]
+layout_mode = 0
+offset_left = 310.0
+offset_top = 33.0
+offset_right = 855.0
+offset_bottom = 308.0
+theme_override_colors/font_color = Color(0.32156864, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "SURFIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="normal" type="Button" parent="." unique_id=2005887236]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 429.0
+offset_right = 451.0
+offset_bottom = 508.0
+theme_override_font_sizes/font_size = 32
+text = "NORMAL"
+
+[node name="chaos" type="Button" parent="." unique_id=550165153]
+layout_mode = 0
+offset_left = 703.0
+offset_top = 429.0
+offset_right = 867.0
+offset_bottom = 508.0
+theme_override_font_sizes/font_size = 32
+text = "CHAOS"
+
+[connection signal="pressed" from="normal" to="." method="_on_normal_pressed"]
+[connection signal="pressed" from="chaos" to="." method="_on_chaos_pressed"]

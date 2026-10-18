@@ -2,7 +2,7 @@ extends Node
 
 @export var SCENES : Array[PackedScene] = []
 @onready var player :CharacterBody2D= $Player
-@export var star_chance :float= 1
+@export var star_chance :int= 1
 const MERMAID = preload("uid://cksslyoqa5srt")
 const SUPER_STAR = preload("uid://by3vc5puq43oc")
 
@@ -15,7 +15,8 @@ func _on_player_died():
 	$CanvasLayer/highscore.show()
 	$"CanvasLayer/game over".show()
 	$CanvasLayer/Button.show()
-
+	$CanvasLayer/Button2.show()
+	
 func _process(delta: float) -> void:
 	$CanvasLayer/Label.text = str(Stats.score)
 	
@@ -23,12 +24,11 @@ func _process(delta: float) -> void:
 
 func _on_plank_timer_timeout() -> void:
 	$obstacle_path/obstacle_spawn_location.progress_ratio = randf()
+	var can_spawn_star :bool= (randi_range(1,5) == star_chance) and $star_timer.timeout
+	var can_spawn_mermaid :bool= (Stats.score > 4) or Stats.chaos_mode
 	var random_scene :PackedScene= SCENES.pick_random()
-	while random_scene == MERMAID and Stats.score < 5:
-		random_scene = SCENES.pick_random()
-	
-	while random_scene == SUPER_STAR and star_chance != randi_range(1, 20) and $star_timer.timeout:
-		random_scene = SCENES.pick_random()
+	while (random_scene == MERMAID and not can_spawn_mermaid) or (random_scene == SUPER_STAR and not can_spawn_star):
+		random_scene = SCENES.pick_random()  
 	
 	var scenes = random_scene.instantiate()
 	scenes.global_position = $obstacle_path/obstacle_spawn_location.global_position
@@ -43,3 +43,8 @@ func _on_button_pressed() -> void:
 	Stats.min_time = 1.0
 	Stats.max_time = 2.0
 	get_tree().reload_current_scene()
+
+
+func _on_button_2_pressed() -> void:
+	Stats._normal_mode_settings()
+	get_tree().change_scene_to_file("res://_scenes/menu.tscn")

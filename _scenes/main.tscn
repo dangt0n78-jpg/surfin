@@ -59,12 +59,21 @@ vertical_alignment = 1
 
 [node name="Button" type="Button" parent="CanvasLayer" unique_id=624146642]
 visible = false
-offset_left = 445.0
-offset_top = 411.0
-offset_right = 692.0
-offset_bottom = 502.0
+offset_left = 201.0
+offset_top = 420.0
+offset_right = 448.0
+offset_bottom = 511.0
 theme_override_font_sizes/font_size = 32
 text = "RESTART"
+
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=2005124510]
+visible = false
+offset_left = 617.0
+offset_top = 417.0
+offset_right = 864.0
+offset_bottom = 508.0
+theme_override_font_sizes/font_size = 32
+text = "Change Mode"
 
 [node name="highscore" type="Label" parent="CanvasLayer" unique_id=1987183050]
 visible = false
@@ -96,12 +105,10 @@ circle_color = Color(0.6431373, 0.17254902, 0.15686275, 0.4745098)
 autostart = true
 
 [node name="star_timer" type="Timer" parent="." unique_id=2088714160]
-wait_time = 30.0
+wait_time = 5.0
 autostart = true
 
-[node name="super_star" parent="." unique_id=495668960 instance=ExtResource("5_g15ir")]
-position = Vector2(1050, 482)
-
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="timeout" from="plank_timer" to="." method="_on_plank_timer_timeout"]
 [connection signal="timeout" from="Special_marker/Timer" to="Special_marker" method="_on_timer_timeout"]

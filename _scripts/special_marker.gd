@@ -10,7 +10,6 @@ var tween :Tween
 var current_alpha :float= 0.0
 var circle_scale :float= 0.0
 
-
 func _ready() -> void:
 	center_pos = get_viewport_rect().size / 2.0
 
@@ -38,7 +37,7 @@ func _get_valid_spawn_point():
 
 
 func _on_timer_timeout() -> void:
-	if Stats.score > 7:
+	if Stats.score > 7 or Stats.chaos_mode:
 		var spawn_pos :Vector2= _get_valid_spawn_point()
 		global_position = spawn_pos
 		current_alpha = 0.4
@@ -59,5 +58,5 @@ func _on_timer_timeout() -> void:
 		var special_scene = random_speacial_scene.instantiate()
 		get_parent().add_child(special_scene)
 		special_scene.global_position = spawn_pos
-		$Timer.wait_time = randf_range(0.5, 2.5)
+		$Timer.wait_time = randf_range(Stats.min_time_marker, Stats.max_time_marker)
 	
