@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://by3vc5puq43oc"]
+
+[ext_resource type="Script" uid="uid://b1w635ulr1ox6" path="res://_scripts/super_star.gd" id="1_akkve"]
+[ext_resource type="Texture2D" uid="uid://y76163neyly0" path="res://_assets/superstar.png" id="2_ekjvi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3owqy"]
+radius = 29.068884
+
+[node name="super_star" type="Area2D" unique_id=495668960 groups=["score obstacle"]]
+script = ExtResource("1_akkve")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=648195778]
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("2_ekjvi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529713689]
+shape = SubResource("CircleShape2D_3owqy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://obtfve6lbv7q" path="res://_scenes/stone.tscn" id="3_6bnj4"]
 [ext_resource type="PackedScene" uid="uid://cksslyoqa5srt" path="res://_scenes/mermaid.tscn" id="4_7kglf"]
 [ext_resource type="Texture2D" uid="uid://b5p2qiwdu1ux0" path="res://_assets/background.png" id="4_owtmn"]
+[ext_resource type="PackedScene" uid="uid://by3vc5puq43oc" path="res://_scenes/super_star.tscn" id="5_g15ir"]
 [ext_resource type="Script" uid="uid://dcapnkx7oycw3" path="res://_scripts/special_marker.gd" id="6_ce27d"]
 [ext_resource type="PackedScene" uid="uid://dh8j24qc7k87s" path="res://_scenes/tentecle.tscn" id="7_urak4"]
 [ext_resource type="PackedScene" uid="uid://c2dfffnl7l8dg" path="res://_scenes/bomb.tscn" id="8_hi6yo"]
@@ -19,9 +20,10 @@ point_count = 5
 
 [node name="main" type="Node" unique_id=1092437447]
 script = ExtResource("1_lavtb")
-SCENES = Array[PackedScene]([ExtResource("3_3q5j6"), ExtResource("3_6bnj4"), ExtResource("4_7kglf")])
+SCENES = Array[PackedScene]([ExtResource("3_3q5j6"), ExtResource("3_6bnj4"), ExtResource("4_7kglf"), ExtResource("5_g15ir")])
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=496991138]
+visible = false
 offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("4_owtmn")
@@ -92,6 +94,13 @@ circle_color = Color(0.6431373, 0.17254902, 0.15686275, 0.4745098)
 
 [node name="Timer" type="Timer" parent="Special_marker" unique_id=2599832]
 autostart = true
+
+[node name="star_timer" type="Timer" parent="." unique_id=2088714160]
+wait_time = 30.0
+autostart = true
+
+[node name="super_star" parent="." unique_id=495668960 instance=ExtResource("5_g15ir")]
+position = Vector2(1050, 482)
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="plank_timer" to="." method="_on_plank_timer_timeout"]

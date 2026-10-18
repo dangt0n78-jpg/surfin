@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var acceleration :float = 300.0
 @export var deceleration :float = 400.0
 
+var invincible_state :bool= false
 const GOLDEN_SPIRAL_RATIO = 0.30635
 var center_pos :Vector2
 var current_speed :float= 0
@@ -45,4 +46,21 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(player_velocity, 600.0 * delta)
 	position.x = clamp(position.x, 24.0, 1138.0)
 	position.y = clamp(position.y, 31.0, 618.0)
+	if invincible_state:
+		$Label.show()
+		$Label.text = str(int($invincible_timer.time_left))
 	move_and_slide()
+
+func _invincible():
+	invincible_state = true
+	$Sprite2D.hide()
+	$invincible.show()
+	$invincible_timer.start()
+
+
+func _on_invincible_timer_timeout() -> void:
+	invincible_state = false
+	$Label.hide()
+	$Sprite2D.show()
+	$invincible.hide()
+	

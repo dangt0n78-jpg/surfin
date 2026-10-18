@@ -2,7 +2,9 @@ extends Node
 
 @export var SCENES : Array[PackedScene] = []
 @onready var player :CharacterBody2D= $Player
+@export var star_chance :float= 1
 const MERMAID = preload("uid://cksslyoqa5srt")
+const SUPER_STAR = preload("uid://by3vc5puq43oc")
 
 func _ready() -> void:
 	player.died.connect(_on_player_died)
@@ -24,6 +26,10 @@ func _on_plank_timer_timeout() -> void:
 	var random_scene :PackedScene= SCENES.pick_random()
 	while random_scene == MERMAID and Stats.score < 5:
 		random_scene = SCENES.pick_random()
+	
+	while random_scene == SUPER_STAR and star_chance != randi_range(1, 20) and $star_timer.timeout:
+		random_scene = SCENES.pick_random()
+	
 	var scenes = random_scene.instantiate()
 	scenes.global_position = $obstacle_path/obstacle_spawn_location.global_position
 	if scenes.is_in_group("score obstacle"):
