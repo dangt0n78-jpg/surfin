@@ -38,7 +38,7 @@ func _get_valid_spawn_point():
 
 
 func _on_timer_timeout() -> void:
-	if Stats.score > 3:
+	if Stats.score > 7:
 		var spawn_pos :Vector2= _get_valid_spawn_point()
 		global_position = spawn_pos
 		current_alpha = 0.4
